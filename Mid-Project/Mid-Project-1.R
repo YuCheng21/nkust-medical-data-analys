@@ -67,6 +67,44 @@ result_3 = data.frame(
 result_3
 
 # Result =====================================================
+cat("請計算懷胎週期及體重的平均數、中位數、變異數及IQR")
 result_1
+cat("接續第(1)小題,請分別以男女嬰兒的結果呈現")
 result_2
+cat("接續第(1)小題,請針對懷胎週期小於平均數下的小孩,計算他們體重的平均數、中位數、變異數及IQR")
 result_3
+# =====================================================
+# 1
+
+x1<-pphn[which(pphn$死亡==0),]
+x2<-pphn[which(pphn$死亡==1),]
+t.test(x1$週數,x2$週數)
+t.test(x1$體重,x2$體重)
+t.test(x1$X1分鐘apgar分數,x2$X1分鐘apgar分數)
+t.test(x1$X5分鐘apgar分數,x2$X5分鐘apgar分數)
+t.test(x1$PH,x2$PH)
+t.test(x1$AaDO2,x2$AaDO2)
+
+# 平均數上具有顯著差異的變量 : 體重
+# 使用的統計方法 : 獨立雙樣本 t 檢定
+
+# 2
+
+wilcox.test(x1$週數,x2$週數,alternative="greater")
+wilcox.test(x1$體重,x2$體重,alternative="greater")
+wilcox.test(x1$X1分鐘apgar分數,x2$X1分鐘apgar分數,alternative="greater")
+wilcox.test(x1$X5分鐘apgar分數,x2$X5分鐘apgar分數,alternative="greater")
+wilcox.test(x1$PH,x2$PH,alternative="greater")
+wilcox.test(x1$AaDO2,x2$AaDO2,alternative="greater")
+
+# 中位數具有顯著差異的變量 : 體重、PH
+# 使用的統計方法 : 獨立雙樣本中位數差異檢定
+
+# 3
+
+prop.test(table(pphn$胎便吸入,pphn$死亡))
+prop.test(table(pphn$早期破水,pphn$死亡))
+prop.test(table(pphn$剖婦產,pphn$死亡))
+
+# 比例分布具有顯著差異的變量 : 剖腹產
+# 使用的統計方法 : 獨立雙樣本比例差異檢定
