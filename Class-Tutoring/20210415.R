@@ -1,4 +1,4 @@
-pphn<-read.csv("./dataset/PPHN.csv")
+pphn<-read.csv("I:/R/Rcode/PPHN.csv")
 class(pphn)
 names(pphn)
 str(pphn)
